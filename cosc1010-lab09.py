@@ -1,8 +1,8 @@
-# Your Name Here
+# Koen Myers 
 # UWYO COSC 1010
-# Submission Date
-# Lab XX
-# Lab Section:
+# 11/17/2024
+# Lab 09
+# Lab Section: 15
 # Sources, people worked with, help given to:
 # Your
 # Comments
@@ -12,6 +12,25 @@
 # For this assignment, you will be creating two classes:
 # One for Pizza
 # One for a Pizzeria
+class Pizza:
+    """Creates the Pizza"""
+    def __init__ (self, size, sauce = "Red"):
+        self.sized(size)
+        self.sauce = sauce
+        self.toppings=["cheese"]
+    def sized(self, size):
+        if not size.isdigit() or int(size) < 10 or size == "":
+            self.size=10
+        else:
+            self.size=int(size)
+    def getSized(self):
+        return self.size
+    def getsauce(self):
+        return self.sauce
+    def setToppings(self, topp):
+        self.toppings+= topp
+    def gettoppings(self):
+        return self.toppings
 
 
 # You will be creating a Pizza class. It should have the following attributes:
@@ -34,6 +53,37 @@
 # - Assign the parameter for size to a size attribute.
 # - Assign the parameter for sauce to the attribute.
 # - Create the toppings attribute, starting off as a list only holding cheese.
+class Pizzaria:
+    """Pizzaria class for an order"""
+    def __init__ (self):
+        self.orders = 0
+        self.price_per_topping = 0.30
+        self.price_per_inch= 0.60
+        self.pizzas = []
+    def placeOrder(self):
+        self.orders += 1 
+        size = input("What size pizza would you like (If left empty, size will be 10)=")
+        sauce = input("What sauce would you like (If left empty, sauce will be red)=")
+        top = input("What toppings would you like and if multiple, seperate by spaces. (If left empty, toppings will be cheese)=")
+        to=top.split()
+        NewPiz= Pizza(size,sauce)
+        NewPiz.setToppings(to)
+        self.pizzas.append(NewPiz)
+    def getPrice(self, pizza):
+        return (pizza.getSized() * self.price_per_inch) + len(pizza.gettoppings()) * self.price_per_topping
+    def getReceipt(self, pizza):
+        receipt=""
+        receipt+=f"You ordered a {pizza.getSized()} inch pizza with {pizza.getsauce()} sauce and the following toppings: \n"
+        for x in pizza.gettoppings():
+            receipt+=f"{x}\n"
+        receipt+=f"Your Price of Toppings is {len(pizza.gettoppings()) * self.price_per_topping}\n"
+        receipt+=f"Your Price for Diameter of Pizza is {pizza.getSized()*self.price_per_inch}\n"
+        receipt+=f"Your Total is {self.getPrice(pizza)}"
+        return print(receipt)
+    def getNumberOfOrder(self):
+        return self.orders
+
+
 
 
 # You will be creating a Pizzeria class with the following attributes:
@@ -69,6 +119,17 @@
 #   - The total price.
 # - getNumberOfOrders()
 #   - This will simply return the number of orders.
+
+freshPizzaria=Pizzaria()
+
+while True:
+    inputing=input("Would you like to place an order? (Type Exit to Exit)=")
+    if inputing.lower()== "exit":
+        break
+    freshPizzaria.placeOrder()
+    freshPizzaria.getReceipt(freshPizzaria.pizzas[-1])
+print(f"Your Number of orders is {freshPizzaria.getNumberOfOrder()}")
+
 
 
 # - Declare your pizzeria object.
