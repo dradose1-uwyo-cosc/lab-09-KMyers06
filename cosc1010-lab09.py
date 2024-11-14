@@ -3,7 +3,7 @@
 # 11/17/2024
 # Lab 09
 # Lab Section: 15
-# Sources, people worked with, help given to:
+# Sources, people worked with, help given to: Emmanual, Tanner
 # Your
 # Comments
 # Here
