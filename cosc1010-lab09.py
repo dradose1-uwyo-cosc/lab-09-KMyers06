@@ -130,8 +130,6 @@ while True:
     freshPizzaria.getReceipt(freshPizzaria.pizzas[-1])
 print(f"Your Number of orders is {freshPizzaria.getNumberOfOrder()}")
 
-
-
 # - Declare your pizzeria object.
 # - Enter a while loop to ask if the user wants to order a pizza.
 # - Exit on the word `exit`.
